@@ -1,0 +1,17 @@
+name: RSpec
+
+on:
+  workflow_call:
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Run RSpec
+        run: bundle exec rspec

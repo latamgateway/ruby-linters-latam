@@ -1,0 +1,26 @@
+name: Setup project database
+
+on:
+  workflow_call:
+    inputs:
+      repository:
+        required: true
+      ref:
+        required: true
+    secrets:
+      access-token:
+        required: true
+        description: |
+          Personal access token used to access private repositories.
+
+jobs:
+  setup-database:
+    uses: ./.github/workflows/setup-project-database.yml
+    with:
+      repository: ${{ inputs.repository }}
+      ref: ${{ inputs.ref }}
+    secrets:
+      token: ${{ secrets.access-token }}
+
+  rspec:
+    uses: ./.github/workflows/rspec.yml
