@@ -7,6 +7,27 @@ jobs:
   rspec:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:11
+        ports: ["5432:5432"]
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       #######################################################################
       # RSpec
@@ -23,6 +44,12 @@ jobs:
         with:
           working-directory: ${{ github.repository }}
           bundler-cache: true
+
+      - name: Setup Database for ${{ github.repository }}
+        env:
+          RAILS_ENV: test
+        working-directory: ${{ github.repository }}
+        run: bundle exec rake db:create db:migrate
 
       - name: RSpec
         working-directory: ${{ github.repository }}

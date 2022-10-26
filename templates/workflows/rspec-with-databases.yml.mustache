@@ -1,0 +1,56 @@
+{{=<% %>=}}
+name: RSpec
+
+on:
+  workflow_call:
+<%# include_external_databases? %>
+    inputs:
+<%# external_databases %>
+      repository<% suffix %>:
+        required: true
+        type: string
+      ref<% suffix %>:
+        required: true
+        type: string
+
+<%/ external_databases %>
+    secrets:
+      access-token:
+        required: true
+        description: |
+          Personal access token used to access private repositories.
+<%/ include_external_databases? %>
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+
+<%# include_services? %>
+    services:
+      postgres:
+        image: postgres:11
+        ports: ["5432:5432"]
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+<%/ include_services? %>
+    steps:
+<%# external_databases %>
+      <%> steps/setup-database.yml %>
+
+<%/ external_databases %>
+      <%> steps/rspec.yml %>

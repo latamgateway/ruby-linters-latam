@@ -1,0 +1,28 @@
+{{=<% %>=}}
+#######################################################################
+# RSpec
+#######################################################################
+
+# https://github.com/actions/checkout#checkout-multiple-repos-side-by-side
+- name: Checkout ${{ github.repository }}
+  uses: actions/checkout@v3
+  with:
+    path: ${{ github.repository }}
+
+- name: Setup Ruby for ${{ github.repository }}
+  uses: ruby/setup-ruby@v1
+  with:
+    working-directory: ${{ github.repository }}
+    bundler-cache: true
+
+<%# has_database? %>
+- name: Setup Database for ${{ github.repository }}
+  env:
+    RAILS_ENV: test
+  working-directory: ${{ github.repository }}
+  run: bundle exec rake db:create db:migrate
+
+<%/ has_database? %>
+- name: RSpec
+  working-directory: ${{ github.repository }}
+  run: bundle exec rspec

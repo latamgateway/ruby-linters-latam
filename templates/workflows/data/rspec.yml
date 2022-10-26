@@ -1,0 +1,4 @@
+include_services?: false
+has_database?: false
+include_external_databases?: false
+external_databases: []
