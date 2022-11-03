@@ -1,0 +1,29 @@
+name: RSpec
+
+on:
+  workflow_call:
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+
+    steps:
+      #######################################################################
+      # RSpec
+      #######################################################################
+
+      # https://github.com/actions/checkout#checkout-multiple-repos-side-by-side
+      - name: Checkout ${{ github.repository }}
+        uses: actions/checkout@v3
+        with:
+          path: ${{ github.repository }}
+
+      - name: Setup Ruby for ${{ github.repository }}
+        uses: ruby/setup-ruby@v1
+        with:
+          working-directory: ${{ github.repository }}
+          bundler-cache: true
+
+      - name: RSpec
+        working-directory: ${{ github.repository }}
+        run: bundle exec rspec

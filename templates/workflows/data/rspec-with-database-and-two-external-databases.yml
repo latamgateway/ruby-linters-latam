@@ -1,0 +1,6 @@
+include_services?: true
+has_database?: true
+include_external_databases?: true
+external_databases:
+  - suffix: 1
+  - suffix: 2

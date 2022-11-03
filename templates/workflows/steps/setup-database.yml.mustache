@@ -1,0 +1,25 @@
+{{=<% %>=}}
+#######################################################################
+# Setup Database<%# suffix %> (<% suffix %>)<%/ suffix %>
+#######################################################################
+
+# https://github.com/actions/checkout#checkout-multiple-repos-side-by-side
+- name: Checkout ${{ inputs.repository<% suffix %> }}@${{ inputs.ref<% suffix %> }}
+  uses: actions/checkout@v3
+  with:
+    repository: ${{ inputs.repository<% suffix %> }}
+    ref: ${{ inputs.ref<% suffix %> }}
+    path: ${{ inputs.repository<% suffix %> }}
+    token: ${{ secrets.access-token }}
+
+- name: Setup Ruby for ${{ inputs.repository<% suffix %> }}@${{ inputs.ref<% suffix %> }}
+  uses: ruby/setup-ruby@v1
+  with:
+    working-directory: ${{ inputs.repository<% suffix %> }}
+    bundler-cache: true
+
+- name: Setup Database for ${{ inputs.repository<% suffix %> }}@${{ inputs.ref<% suffix %> }}
+  env:
+    RAILS_ENV: test
+  working-directory: ${{ inputs.repository<% suffix %> }}
+  run: bundle exec rake db:create db:migrate

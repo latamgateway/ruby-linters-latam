@@ -1,0 +1,126 @@
+name: RSpec
+
+on:
+  workflow_call:
+    inputs:
+      repository1:
+        required: true
+        type: string
+      ref1:
+        required: true
+        type: string
+
+      repository2:
+        required: true
+        type: string
+      ref2:
+        required: true
+        type: string
+
+    secrets:
+      access-token:
+        required: true
+        description: |
+          Personal access token used to access private repositories.
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:11
+        ports: ["5432:5432"]
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      #######################################################################
+      # Setup Database (1)
+      #######################################################################
+
+      # https://github.com/actions/checkout#checkout-multiple-repos-side-by-side
+      - name: Checkout ${{ inputs.repository1 }}@${{ inputs.ref1 }}
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ inputs.repository1 }}
+          ref: ${{ inputs.ref1 }}
+          path: ${{ inputs.repository1 }}
+          token: ${{ secrets.access-token }}
+
+      - name: Setup Ruby for ${{ inputs.repository1 }}@${{ inputs.ref1 }}
+        uses: ruby/setup-ruby@v1
+        with:
+          working-directory: ${{ inputs.repository1 }}
+          bundler-cache: true
+
+      - name: Setup Database for ${{ inputs.repository1 }}@${{ inputs.ref1 }}
+        env:
+          RAILS_ENV: test
+        working-directory: ${{ inputs.repository1 }}
+        run: bundle exec rake db:create db:migrate
+
+      #######################################################################
+      # Setup Database (2)
+      #######################################################################
+
+      # https://github.com/actions/checkout#checkout-multiple-repos-side-by-side
+      - name: Checkout ${{ inputs.repository2 }}@${{ inputs.ref2 }}
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ inputs.repository2 }}
+          ref: ${{ inputs.ref2 }}
+          path: ${{ inputs.repository2 }}
+          token: ${{ secrets.access-token }}
+
+      - name: Setup Ruby for ${{ inputs.repository2 }}@${{ inputs.ref2 }}
+        uses: ruby/setup-ruby@v1
+        with:
+          working-directory: ${{ inputs.repository2 }}
+          bundler-cache: true
+
+      - name: Setup Database for ${{ inputs.repository2 }}@${{ inputs.ref2 }}
+        env:
+          RAILS_ENV: test
+        working-directory: ${{ inputs.repository2 }}
+        run: bundle exec rake db:create db:migrate
+
+      #######################################################################
+      # RSpec
+      #######################################################################
+
+      # https://github.com/actions/checkout#checkout-multiple-repos-side-by-side
+      - name: Checkout ${{ github.repository }}
+        uses: actions/checkout@v3
+        with:
+          path: ${{ github.repository }}
+
+      - name: Setup Ruby for ${{ github.repository }}
+        uses: ruby/setup-ruby@v1
+        with:
+          working-directory: ${{ github.repository }}
+          bundler-cache: true
+
+      - name: Setup Database for ${{ github.repository }}
+        env:
+          RAILS_ENV: test
+        working-directory: ${{ github.repository }}
+        run: bundle exec rake db:create db:migrate
+
+      - name: RSpec
+        working-directory: ${{ github.repository }}
+        run: bundle exec rspec
