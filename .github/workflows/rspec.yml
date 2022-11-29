@@ -2,12 +2,21 @@ name: RSpec
 
 on:
   workflow_call:
+    inputs:
+      package_dependencies:
+        required: false
+        type: string
+        default: ""
 
 jobs:
   rspec:
     runs-on: ubuntu-latest
 
     steps:
+      - name: "Install Package Dependencies"
+        if: ${{ inputs.package_dependencies != '' }}
+        run: sudo apt-get install --yes --quiet ${{ inputs.package_dependencies }}
+
       #######################################################################
       # RSpec
       #######################################################################

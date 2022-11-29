@@ -3,6 +3,11 @@ name: RSpec
 on:
   workflow_call:
     inputs:
+      package_dependencies:
+        required: false
+        type: string
+        default: ""
+
       repository1:
         required: true
         type: string
@@ -49,6 +54,10 @@ jobs:
           --health-retries 5
 
     steps:
+      - name: "Install Package Dependencies"
+        if: ${{ inputs.package_dependencies != '' }}
+        run: sudo apt-get install --yes --quiet ${{ inputs.package_dependencies }}
+
       #######################################################################
       # Setup Database (1)
       #######################################################################
