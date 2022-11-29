@@ -3,8 +3,13 @@ name: RSpec
 
 on:
   workflow_call:
-<%# include_external_databases? %>
     inputs:
+      package_dependencies:
+        required: false
+        type: string
+        default: ""
+<%# include_external_databases? %>
+
 <%# external_databases %>
       repository<% suffix %>:
         required: true
@@ -49,6 +54,10 @@ jobs:
 
 <%/ include_services? %>
     steps:
+      - name: "Install Package Dependencies"
+        if: ${{ inputs.package_dependencies != '' }}
+        run: sudo apt-get install --yes --quiet ${{ inputs.package_dependencies }}
+
 <%# external_databases %>
       <%> steps/setup-database.yml %>
 
