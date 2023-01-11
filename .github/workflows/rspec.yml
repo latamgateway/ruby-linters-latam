@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: "Install Package Dependencies"
         if: ${{ inputs.package_dependencies != '' }}
-        run: sudo apt-get install --yes --quiet ${{ inputs.package_dependencies }}
+        run: sudo apt-get update && sudo apt-get install --yes --quiet ${{ inputs.package_dependencies }}
 
       #######################################################################
       # RSpec
