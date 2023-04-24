@@ -1,0 +1,10 @@
+rules:
+  - id: space-escape-sequence-string-literal
+    pattern-regex: '" "|'' '''
+    fix: '"\s"'
+    message: |
+      Prefer the usage of a space escape sequence ("\s")
+      for single space string literals.
+    languages:
+      - ruby
+    severity: ERROR

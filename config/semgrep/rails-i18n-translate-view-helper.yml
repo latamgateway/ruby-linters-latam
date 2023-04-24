@@ -1,0 +1,18 @@
+rules:
+  - id: rails-i18n-translate-view-helper
+    pattern: |
+      I18n.t($...PARAMS)
+    paths:
+      include:
+        - "*.erb"
+    fix: |
+      t($...PARAMS)
+    message: |
+      Rails adds a `t` (translate) helper method to your views
+      so that you do not need to spell out `I18n.t` all the time.
+    languages:
+      - generic
+    severity: ERROR
+    metadata:
+      references:
+        - https://guides.rubyonrails.org/i18n.html#abstracting-localized-code

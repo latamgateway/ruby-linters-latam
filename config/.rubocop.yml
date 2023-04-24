@@ -1,0 +1,13 @@
+require:
+  - rubocop-rspec
+
+AllCops:
+  DisabledByDefault: true
+
+  Exclude:
+    - !ruby/regexp /db\/schema\.rb/
+
+inherit_from:
+  - rubocop/Layout.yml
+  - rubocop/Style.yml
+  - rubocop/RSpec.yml

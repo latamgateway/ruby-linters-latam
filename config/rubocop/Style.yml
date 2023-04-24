@@ -1,0 +1,55 @@
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
+  EnforcedStyleForMultiline: comma
+
+Style/DefWithParentheses:
+  Enabled: true
+
+Style/MethodDefParentheses:
+  Enabled: true
+
+Style/MethodCallWithoutArgsParentheses:
+  Enabled: true
+
+Style/MethodCallWithArgsParentheses:
+  Enabled: true
+  AllowedMethods:
+    - puts
+    - describe
+    - to
+    - to_not
+    - not_to
+    - be
+    - eq
+    - raise_error
+    - raise
+    - redirect_to
+    - render
+  Exclude:
+    - !ruby/regexp /db\/migrate/
+
+Style/RedundantParentheses:
+  Enabled: true
+
+Style/ParenthesesAroundCondition:
+  Enabled: true
+  AllowSafeAssignment: false
+
+Style/StabbyLambdaParentheses:
+  Enabled: true
+
+Style/Not:
+  Enabled: true
+
+Style/AndOr:
+  Enabled: true
+
+Style/SymbolProc:
+  Enabled: true
+
+Style/DateTime:
+  Enabled: true

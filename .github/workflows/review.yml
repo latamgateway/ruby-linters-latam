@@ -1,0 +1,79 @@
+name: Review
+
+on:
+  workflow_call:
+
+jobs:
+  pronto:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout latamgateway/ruby-linters-latam
+        uses: actions/checkout@v3
+        with:
+          repository: latamgateway/ruby-linters-latam
+          ref: review
+          path: latamgateway/ruby-linters-latam
+
+      - name: Install
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.0"
+          working-directory: latamgateway/ruby-linters-latam/linters/pronto
+          bundler-cache: true
+
+      - name: Checkout ${{ github.repository }}
+        uses: actions/checkout@v3
+        with:
+          path: ${{ github.repository }}
+          fetch-depth: 0
+
+      - name: Setup configuration
+        working-directory: ${{ github.repository }}
+        run: |
+          cp -r ${{ github.workspace }}/latamgateway/ruby-linters-latam/config/rubocop .
+          cp ${{ github.workspace }}/latamgateway/ruby-linters-latam/config/.rubocop.yml .
+          cp ${{ github.workspace }}/latamgateway/ruby-linters-latam/config/.erb-lint.yml .
+          cp ${{ github.workspace }}/latamgateway/ruby-linters-latam/config/.fasterer.yml .
+
+      - name: Pronto
+        env:
+          BUNDLE_GEMFILE: ${{ github.workspace }}/latamgateway/ruby-linters-latam/linters/pronto/Gemfile
+        working-directory: ${{ github.repository }}
+        run: |
+          bundle exec pronto run \
+            --exit-code \
+            --commit=origin/${{ github.base_ref }}
+
+  semgrep:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout latamgateway/ruby-linters-latam
+        uses: actions/checkout@v3
+        with:
+          repository: latamgateway/ruby-linters-latam
+          ref: review
+          path: latamgateway/ruby-linters-latam
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          cache: pip
+
+      - name: Install
+        working-directory: latamgateway/ruby-linters-latam/linters/semgrep
+        run: pip install -r requirements.txt
+
+      - name: Checkout ${{ github.repository }}
+        uses: actions/checkout@v3
+        with:
+          path: ${{ github.repository }}
+          fetch-depth: 0
+
+      - name: Semgrep
+        working-directory: ${{ github.repository }}
+        run: |
+          semgrep ci \
+            --config=${{ github.workspace }}/latamgateway/ruby-linters-latam/config/semgrep \
+            --baseline-commit=origin/${{ github.base_ref }}

@@ -1,0 +1,17 @@
+EnableDefaultLinters: false
+
+linters:
+  RequireInputAutocomplete:
+    enabled: false
+  Rubocop:
+    enabled: true
+    rubocop_config:
+      inherit_from:
+        - .rubocop.yml
+      Layout/TrailingEmptyLines:
+        Enabled: false
+      Style/MethodCallWithArgsParentheses:
+        Enabled: false
+      Layout/LineLength:
+        Enabled: true
+        Max: 100
