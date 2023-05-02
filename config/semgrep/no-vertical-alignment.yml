@@ -1,0 +1,11 @@
+rules:
+  - id: no-vertical-alignment
+    pattern-regex: '(\S)[\x20\t]{2,}'
+    fix: "$1 "
+    message: Don't use whitespace for vertical alignment.
+    languages:
+      - generic
+    severity: ERROR
+    metadata:
+      references:
+        - https://en.wikipedia.org/wiki/Programming_style#Vertical_alignment
