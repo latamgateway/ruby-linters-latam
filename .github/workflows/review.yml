@@ -5,6 +5,7 @@ on:
 
 jobs:
   pronto:
+    if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -46,6 +47,7 @@ jobs:
             --commit=origin/${{ github.base_ref }}
 
   semgrep:
+    if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
 
     steps:
