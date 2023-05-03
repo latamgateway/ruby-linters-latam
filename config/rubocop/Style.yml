@@ -20,6 +20,7 @@ Style/MethodCallWithArgsParentheses:
   AllowedMethods:
     - puts
     - describe
+    - shared_examples
     - to
     - to_not
     - not_to
