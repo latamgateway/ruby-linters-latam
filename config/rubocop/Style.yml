@@ -53,3 +53,8 @@ Style/SymbolProc:
 
 Style/DateTime:
   Enabled: true
+
+Style/HashSyntax:
+  Enabled: true
+  EnforcedStyle: ruby19_no_mixed_keys
+  EnforcedShorthandSyntax: either
