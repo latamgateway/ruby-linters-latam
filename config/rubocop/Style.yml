@@ -30,6 +30,7 @@ Style/MethodCallWithArgsParentheses:
     - raise
     - redirect_to
     - render
+    - head
   Exclude:
     - !ruby/regexp /db\/migrate/
 
