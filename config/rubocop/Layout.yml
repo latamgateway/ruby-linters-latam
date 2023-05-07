@@ -114,3 +114,6 @@ Layout/TrailingWhitespace:
 
 Layout/SpaceAroundBlockParameters:
   Enabled: true
+
+Layout/HashAlignment:
+  Enabled: true
