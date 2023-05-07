@@ -16,12 +16,17 @@ jobs:
           ref: review
           path: latamgateway/ruby-linters-latam
 
-      - name: Install
+      - name: Install Pronto
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.0"
           working-directory: latamgateway/ruby-linters-latam/linters/pronto
           bundler-cache: true
+
+      - name: Install yamllint
+        run: |
+          sudo apt-get update --quiet
+          sudo apt-get install --yes --quiet yamllint
 
       - name: Checkout ${{ github.repository }}
         uses: actions/checkout@v3
@@ -35,6 +40,7 @@ jobs:
           cp -r ${{ github.workspace }}/latamgateway/ruby-linters-latam/config/rubocop .
           cp ${{ github.workspace }}/latamgateway/ruby-linters-latam/config/.rubocop.yml .
           cp ${{ github.workspace }}/latamgateway/ruby-linters-latam/config/.erb-lint.yml .
+          cp ${{ github.workspace }}/latamgateway/ruby-linters-latam/config/.yamllint.yml .
           cp ${{ github.workspace }}/latamgateway/ruby-linters-latam/config/.fasterer.yml .
 
       - name: Pronto
