@@ -111,3 +111,6 @@ Layout/TrailingEmptyLines:
 
 Layout/TrailingWhitespace:
   Enabled: true
+
+Layout/SpaceAroundBlockParameters:
+  Enabled: true
