@@ -132,12 +132,15 @@ Layout/MultilineMethodParameterLineBreaks:
 
 Layout/FirstHashElementIndentation:
   Enabled: true
+  EnforcedStyle: consistent
 
 Layout/FirstArrayElementIndentation:
   Enabled: true
+  EnforcedStyle: consistent
 
 Layout/FirstArgumentIndentation:
   Enabled: true
+  EnforcedStyle: consistent
 
 Layout/FirstParameterIndentation:
   Enabled: true
