@@ -129,3 +129,15 @@ Layout/MultilineMethodArgumentLineBreaks:
 
 Layout/MultilineMethodParameterLineBreaks:
   Enabled: true
+
+Layout/FirstHashElementIndentation:
+  Enabled: true
+
+Layout/FirstArrayElementIndentation:
+  Enabled: true
+
+Layout/FirstArgumentIndentation:
+  Enabled: true
+
+Layout/FirstParameterIndentation:
+  Enabled: true
