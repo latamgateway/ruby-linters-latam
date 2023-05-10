@@ -10,4 +10,5 @@ AllCops:
 inherit_from:
   - rubocop/Layout.yml
   - rubocop/Style.yml
+  - rubocop/Lint.yml
   - rubocop/RSpec.yml
