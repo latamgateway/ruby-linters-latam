@@ -69,3 +69,6 @@ Style/ConditionalAssignment:
 
 Style/NumericPredicate:
   Enabled: true
+
+Style/MutableConstant:
+  Enabled: true

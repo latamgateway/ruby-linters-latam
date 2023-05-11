@@ -1,2 +1,5 @@
 Rails/CreateTableWithTimestamps:
   Enabled: true
+
+Rails/Output:
+  Enabled: true
