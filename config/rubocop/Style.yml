@@ -63,3 +63,9 @@ Style/HashSyntax:
 
 Style/RedundantBegin:
   Enabled: true
+
+Style/ConditionalAssignment:
+  Enabled: true
+
+Style/NumericPredicate:
+  Enabled: true

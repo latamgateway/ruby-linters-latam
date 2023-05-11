@@ -1,2 +1,5 @@
 Lint/SymbolConversion:
   Enabled: true
+
+Lint/MissingCopEnableDirective:
+  Enabled: true

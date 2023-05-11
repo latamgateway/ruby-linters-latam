@@ -144,3 +144,6 @@ Layout/FirstArgumentIndentation:
 
 Layout/FirstParameterIndentation:
   Enabled: true
+
+Layout/MultilineMethodCallIndentation:
+  Enabled: true
