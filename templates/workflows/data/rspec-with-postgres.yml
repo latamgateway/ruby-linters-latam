@@ -1,6 +1,6 @@
-include_services?: false
-include_postgres_service?: false
+include_services?: true
+include_postgres_service?: true
 include_redis_service?: false
-has_database?: false
+has_database?: true
 include_external_databases?: false
 external_databases: []

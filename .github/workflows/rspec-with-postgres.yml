@@ -1,0 +1,56 @@
+name: RSpec
+
+on:
+  workflow_call:
+    inputs:
+      package_dependencies:
+        required: false
+        type: string
+        default: ""
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:11
+        ports: ["5432:5432"]
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: "Install Package Dependencies"
+        if: ${{ inputs.package_dependencies != '' }}
+        run: sudo apt-get update && sudo apt-get install --yes --quiet ${{ inputs.package_dependencies }}
+
+      #######################################################################
+      # RSpec
+      #######################################################################
+
+      # https://github.com/actions/checkout#checkout-multiple-repos-side-by-side
+      - name: Checkout ${{ github.repository }}
+        uses: actions/checkout@v3
+        with:
+          path: ${{ github.repository }}
+
+      - name: Setup Ruby for ${{ github.repository }}
+        uses: ruby/setup-ruby@v1
+        with:
+          working-directory: ${{ github.repository }}
+          bundler-cache: true
+
+      - name: Setup Database for ${{ github.repository }}
+        env:
+          RAILS_ENV: test
+        working-directory: ${{ github.repository }}
+        run: bundle exec rake db:create db:migrate
+
+      - name: RSpec
+        working-directory: ${{ github.repository }}
+        run: bundle exec rspec
