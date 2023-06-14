@@ -1,5 +1,8 @@
 extends: default
 
+ignore:
+  - "**/spec/support/cassettes"
+
 rules:
   line-length:
     max: 120
