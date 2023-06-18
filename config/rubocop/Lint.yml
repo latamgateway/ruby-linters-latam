@@ -3,3 +3,6 @@ Lint/SymbolConversion:
 
 Lint/MissingCopEnableDirective:
   Enabled: true
+
+Lint/Debugger:
+  Enabled: true
