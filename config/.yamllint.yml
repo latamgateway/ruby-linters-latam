@@ -10,4 +10,8 @@ rules:
   comments:
     level: error
 
+  truthy:
+    allowed-values:
+      - "on"
+
   document-start: disable
