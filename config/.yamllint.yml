@@ -12,6 +12,8 @@ rules:
 
   truthy:
     allowed-values:
+      - "true"
+      - "false"
       - "on"
 
   document-start: disable
