@@ -38,6 +38,7 @@ jobs:
         working-directory: ${{ github.repository }}
         run: |
           cp -r ${{ github.workspace }}/latamgateway/ruby-linters-latam/config/rubocop .
+          cp ${{ github.workspace }}/latamgateway/ruby-linters-latam/config/.pronto.yml .
           cp ${{ github.workspace }}/latamgateway/ruby-linters-latam/config/.rubocop.yml .
           cp ${{ github.workspace }}/latamgateway/ruby-linters-latam/config/.erb-lint.yml .
           cp ${{ github.workspace }}/latamgateway/ruby-linters-latam/config/.yamllint.yml .
