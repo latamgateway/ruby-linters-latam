@@ -1,0 +1,2 @@
+brakeman:
+  run_all_checks: true

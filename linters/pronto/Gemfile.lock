@@ -22,6 +22,7 @@ GEM
       erubi (~> 1.4)
       parser (>= 2.4)
       smart_properties
+    brakeman (6.0.1)
     builder (3.2.4)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
@@ -73,6 +74,9 @@ GEM
       rexml (>= 3.2.5, < 4.0)
       rugged (>= 0.23.0, < 2.0)
       thor (>= 0.20.3, < 2.0)
+    pronto-brakeman (0.11.2)
+      brakeman (>= 3.2.0)
+      pronto (~> 0.11.0)
     pronto-erb_lint (0.1.6)
       erb_lint (~> 0.1, >= 0.1.1)
       pronto (~> 0.9, > 0.9.0)
@@ -152,6 +156,7 @@ PLATFORMS
 DEPENDENCIES
   faraday-retry (~> 2.1)
   pronto (~> 0.11.1)
+  pronto-brakeman (~> 0.11.2)
   pronto-erb_lint (~> 0.1.6)
   pronto-rubocop (~> 0.11.5)
   pronto-scss (~> 0.11.0)
@@ -160,4 +165,4 @@ DEPENDENCIES
   rubocop-rspec (~> 2.20)
 
 BUNDLED WITH
-   2.3.26
+   2.4.17
