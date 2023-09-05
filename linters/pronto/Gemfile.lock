@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/ngudbhav/pronto-npm-eslint
+  revision: 80acfa7af7317d40a8401e152dab4ac8a8f86224
+  specs:
+    pronto-eslint_npm (0.11.0)
+      pronto (~> 0.11.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -158,6 +165,7 @@ DEPENDENCIES
   pronto (~> 0.11.1)
   pronto-brakeman (~> 0.11.2)
   pronto-erb_lint (~> 0.1.6)
+  pronto-eslint_npm!
   pronto-rubocop (~> 0.11.5)
   pronto-scss (~> 0.11.0)
   pronto-yamllint (~> 0.2.0)

@@ -43,6 +43,20 @@ jobs:
           cp ${{ github.workspace }}/latamgateway/ruby-linters-latam/config/.erb-lint.yml .
           cp ${{ github.workspace }}/latamgateway/ruby-linters-latam/config/.yamllint.yml .
           cp ${{ github.workspace }}/latamgateway/ruby-linters-latam/config/.fasterer.yml .
+          cp ${{ github.workspace }}/latamgateway/ruby-linters-latam/linters/eslint/package.json .
+          cp ${{ github.workspace }}/latamgateway/ruby-linters-latam/linters/eslint/package-lock.json .
+          cp ${{ github.workspace }}/latamgateway/ruby-linters-latam/config/.eslintrc.yml .
+
+      - uses: actions/setup-node@v3
+        with:
+          cache: npm
+          cache-dependency-path: ${{ github.repository }}/package-lock.json
+
+      - name: Install eslint
+        working-directory: ${{ github.repository }}
+        run: |
+          npm install eslint --global
+          npm ci
 
       - name: Pronto
         env:
