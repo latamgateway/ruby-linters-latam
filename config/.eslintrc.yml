@@ -16,7 +16,7 @@ rules:
   prettier/prettier: error
   no-undef: warn
   no-unused-vars:
-    - warn
+    - "off"
     - argsIgnorePattern: "^_"
 globals:
   "$": "readonly"
