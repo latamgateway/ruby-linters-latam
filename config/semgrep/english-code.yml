@@ -1,0 +1,16 @@
+rules:
+  - id: english-code
+    pattern-regex: "[^[:ascii:]]+"
+    paths:
+      exclude:
+        - "*.yml"
+        - "*.yaml"
+    message: |
+      Keep the code and any literal values in English.
+      Extract all translations into an appropriate configuration.
+    languages:
+      - generic
+    severity: ERROR
+    metadata:
+      references:
+        - https://rubystyle.guide/#english-identifiers
