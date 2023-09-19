@@ -9,6 +9,9 @@ plugins:
 parserOptions:
   ecmaVersion: latest
   sourceType: module
+ignorePatterns:
+  - "**/vendor/assets/javascripts/*.js"
+  - "**/vendor/assets/**/*.js"
 rules:
   prettier/prettier: error
   no-undef: warn
