@@ -150,3 +150,6 @@ Layout/FirstParameterIndentation:
 
 Layout/MultilineMethodCallIndentation:
   Enabled: true
+
+Layout/SpaceBeforeComma:
+  Enabled: true
