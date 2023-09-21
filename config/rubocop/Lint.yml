@@ -6,3 +6,6 @@ Lint/MissingCopEnableDirective:
 
 Lint/Debugger:
   Enabled: true
+
+Lint/UnusedMethodArgument:
+  Enabled: true
