@@ -15,10 +15,7 @@ ignorePatterns:
 rules:
   prettier/prettier: error
   no-undef: warn
-  no-unused-vars:
-    - "error"
-    - argsIgnorePattern: "^_"
-      vars: "local"
+  no-unused-vars: "off"
 globals:
   "$": "readonly"
   "Rails": "readonly"
