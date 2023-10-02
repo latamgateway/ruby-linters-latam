@@ -2,6 +2,7 @@ extends: default
 
 ignore:
   - "**/spec/support/cassettes"
+  - "**/vcr_cassettes"
 
 rules:
   line-length:
