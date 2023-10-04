@@ -5,6 +5,7 @@ rules:
       exclude:
         - "*.yml"
         - "*.yaml"
+        - "config/locales/**/*.rb"
     message: |
       Keep the code and any literal values in English.
       Extract all translations into an appropriate configuration.
