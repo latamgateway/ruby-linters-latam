@@ -5,10 +5,11 @@ rules:
     paths:
       include:
         - "*.erb"
+        - "*_controller.rb"
     fix: |
       t($...PARAMS)
     message: |
-      Rails adds a `t` (translate) helper method to your views
+      Rails adds a `t` (translate) helper method to your views and controllers
       so that you do not need to spell out `I18n.t` all the time.
     languages:
       - generic
@@ -16,3 +17,5 @@ rules:
     metadata:
       references:
         - https://guides.rubyonrails.org/i18n.html#abstracting-localized-code
+        - https://api.rubyonrails.org/classes/ActionView/Helpers/TranslationHelper.html#method-i-translate
+        - https://api.rubyonrails.org/classes/AbstractController/Translation.html#method-i-translate
