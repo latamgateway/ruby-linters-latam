@@ -1,0 +1,14 @@
+rules:
+  - id: avoid-instance-variables-in-class-methods
+    patterns:
+      - pattern-inside: |
+          def self.$M(...)
+            ...
+          end
+      - pattern-regex: '(@\w+)'
+      - focus-metavariable: $1
+    message: |
+      Avoid the usage of instance variables inside class methods.
+    languages:
+      - ruby
+    severity: ERROR

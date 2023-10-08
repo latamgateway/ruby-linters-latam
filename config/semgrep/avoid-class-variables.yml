@@ -1,0 +1,8 @@
+rules:
+  - id: avoid-class-variables
+    pattern-regex: '(@@\w+)'
+    message: |
+      Avoid the usage of class variables.
+    languages:
+      - ruby
+    severity: ERROR

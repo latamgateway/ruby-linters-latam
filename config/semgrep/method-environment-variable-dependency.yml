@@ -1,0 +1,20 @@
+rules:
+  - id: method-environment-variable-dependency
+    patterns:
+      - pattern-inside: |
+          def $M(...)
+            $BODY
+          end
+      - metavariable-pattern:
+          metavariable: $BODY
+          pattern-either:
+            - pattern: ENV[$KEY]
+            - pattern: ENV.fetch($KEY, ...)
+      - focus-metavariable: $KEY
+    message: |
+      Don't reference environment variables inside methods,
+      as this creates a dependency on them.
+      Either pass the value as a parameter or move it to a constant.
+    languages:
+      - ruby
+    severity: ERROR

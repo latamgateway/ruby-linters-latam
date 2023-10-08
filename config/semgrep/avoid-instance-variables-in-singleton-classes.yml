@@ -1,0 +1,14 @@
+rules:
+  - id: avoid-instance-variables-in-singleton-classes
+    patterns:
+      - pattern-inside: |
+          class << self
+            ...
+          end
+      - pattern-regex: '(@\w+)'
+      - focus-metavariable: $1
+    message: |
+      Avoid the usage of instance variables inside singleton classes.
+    languages:
+      - ruby
+    severity: ERROR

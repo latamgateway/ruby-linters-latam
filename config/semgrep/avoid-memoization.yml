@@ -1,0 +1,9 @@
+rules:
+  - id: avoid-memoization
+    pattern: |
+      $X ||= $Y
+    message: |
+      Avoid the usage of memoization.
+    languages:
+      - ruby
+    severity: ERROR
